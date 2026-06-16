@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StarupAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Redefined colors to match the exquisite cyber neon futuristic screenshot
+              gray: {
+                50: '#070518',     // Replace light gray background with dark cyber theme
+                100: '#0c0827',
+                200: '#140e44',
+                300: '#1e1666',
+                400: '#6366f1',
+                500: '#818cf8',
+                600: '#a238ff',
+                700: '#00e5ff',
+                800: '#08061a',
+                900: '#03020e',
+                950: '#010103',
+              },
+              slate: {
+                50: '#070518',
+                100: '#0c0827',
+                200: '#140e44',
+                300: '#1e1666',
+                400: '#6366f1',
+                500: '#818cf8',
+                600: '#a238ff',
+                700: '#00e5ff',
+                800: '#08061a',
+                900: '#03020e',
+                950: '#010103',
+              },
+              zinc: {
+                50: '#070518',
+                100: '#0c0827',
+                200: '#140e44',
+                300: '#1e1666',
+                400: '#6366f1',
+                500: '#818cf8',
+                600: '#a238ff',
+                700: '#00e5ff',
+                800: '#08061a',
+                900: '#03020e',
+                950: '#010103',
+              },
+              neutral: {
+                50: '#070518',
+                100: '#0c0827',
+                200: '#140e44',
+                300: '#1e1666',
+                400: '#6366f1',
+                500: '#818cf8',
+                600: '#a238ff',
+                700: '#00e5ff',
+                800: '#08061a',
+                900: '#03020e',
+                950: '#010103',
+              },
+              // Force green (ijo) to map to glowing electric cyan/blue
+              green: {
+                50: '#e0f7fa',
+                100: '#b2ebf2',
+                200: '#80deea',
+                300: '#4dd0e1',
+                400: '#26c6da',
+                500: '#00bcd4', // Radiant cyan/blue
+                600: '#00e5ff', // Glow active cyan
+                700: '#0097a7',
+                800: '#006064',
+                900: '#002f3c',
+              },
+              emerald: {
+                50: '#e0f7fa',
+                100: '#b2ebf2',
+                200: '#80deea',
+                300: '#00e5ff',
+                400: '#00d2ff',
+                500: '#00d2ff', // Electric cyan
+                600: '#bd4bf6', // Magenta purple accent
+                700: '#0097a7',
+                800: '#006064',
+                900: '#002f3c',
+              },
+              teal: {
+                500: '#00e5ff',
+                600: '#bd4bf6',
+              },
+              // Purple / Violet / Indigo mapped to gorgeous cyber violet-indigo gradients
+              purple: {
+                50: '#f5f3ff',
+                100: '#ede9fe',
+                200: '#ddd6fe',
+                300: '#bd4bf6', // Neon purple
+                400: '#a238ff',
+                500: '#a855f7',
+                600: '#bd4bf6', // Core active glowing purple
+                700: '#7e22ce',
+                800: '#581c87',
+                900: '#3b0764',
+              },
+              violet: {
+                50: '#f5f3ff',
+                100: '#ede9fe',
+                200: '#ddd6fe',
+                305: '#bd4bf6',
+                300: '#bd4bf6',
+                400: '#a238ff',
+                500: '#a855f7',
+                600: '#bd4bf6',
+                700: '#7e22ce',
+              },
+              indigo: {
+                50: '#f5f3ff',
+                100: '#ede9fe',
+                205: '#0c0827',
+                300: '#818cf8',
+                450: '#3b82f6',
+                500: '#3b82f6', // Cyber blue
+                600: '#bd4bf6', // Glowing purple
+                700: '#1d4ed8',
+                800: '#1e1b4b',
+                900: '#03020e',
+              },
+              amber: {
+                50: '#0c0827',
+                100: '#1e1666',
+                200: '#bd4bf6',
+                300: '#00e5ff',
+                400: '#bd4bf6',
+                500: '#00d2ff',
+                600: '#00e5ff',
+                800: '#bd4bf6'
+              },
+              // Force bg-white/text-white layers
+              white: '#ffffff',
+            },
+            fontFamily: {
+              sans: ['Poppins', 'Inter', 'sans-serif'],
+              orbitron: ['Orbitron', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;600&family=Dancing+Script:wght@700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet col" />
+    <style>
+      /* High-contrast celestial cyber theme based on screenshot */
+      body {
+        background-color: #03020e !important;
+        background-image: 
+          radial-gradient(circle at 10% 15%, rgba(189, 75, 246, 0.15) 0%, transparent 45%),
+          radial-gradient(circle at 90% 85%, rgba(0, 240, 255, 0.15) 0%, transparent 45%),
+          radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
+          linear-gradient(rgba(255, 255, 255, 0.006) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.006) 1px, transparent 1px) !important;
+        background-size: 100% 100%, 100% 100%, 100% 100%, 50px 50px, 50px 50px !important;
+        color: #e2e8f0;
+        min-height: 100vh;
+      }
+
+      /* Animated Glowing star overlay */
+      body::before {
+        content: '';
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-image: 
+          radial-gradient(white, rgba(255,255,255,.25) 2px, transparent 40px),
+          radial-gradient(white, rgba(255,255,255,.18) 1px, transparent 30px);
+        background-size: 550px 550px, 350px 350px;
+        background-position: 0 0, 40px 60px;
+        opacity: 0.25;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      @keyframes pulse-slow {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
+      }
+      .animate-pulse-slow {
+        animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      
+      /* Custom Scrollbar for nicer UI */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(4, 2, 18, 0.8) !important;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #bd4bf6, #00d2ff) !important;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #d946ef, #00e5ff) !important;
+      }
+
+      /* Image Overlay Transition */
+      .image-overlay {
+          opacity: 0;
+          transition: opacity 0.3s ease-in-out;
+      }
+      .image-container:hover .image-overlay {
+          opacity: 1;
+      }
+
+      /* FoodDrinkGenerator Custom Styles */
+      .font-serif-display { font-family: 'Playfair Display', serif; }
+      .font-sans-modern { font-family: 'Poppins', sans-serif; }
+      
+      @keyframes scan {
+          0% { top: 0%; opacity: 0; }
+          50% { opacity: 1; }
+          100% { top: 100%; opacity: 0; }
+      }
+      .animate-scan {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background: linear-gradient(90deg, transparent, #f97316, transparent);
+          animation: scan 2s infinite linear;
+          box-shadow: 0 0 10px #f97316;
+      }
+      
+      .bg-checkered {
+          background-color: #f3f4f6;
+          background-image: linear-gradient(45deg, #e5e7eb 25%, transparent 25%), linear-gradient(-45deg, #e5e7eb 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e5e7eb 75%), linear-gradient(-45deg, transparent 75%, #e5e7eb 75%);
+          background-size: 20px 20px;
+          background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      }
+
+      .category-badge {
+          clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+      }
+
+      /* Cyber panels - transforms standard backgrounds into the screenshot's premium glowing neon-bordered panels */
+      .cyber-panel, 
+      [class*="bg-[#080614]"], 
+      [class*="bg-[#0d0c1d]"], 
+      .bg-slate-900\/70, 
+      .bg-\[\#080614\]\/70,
+      .bg-gray-800,
+      .bg-slate-800,
+      .bg-neutral-900,
+      .bg-slate-900 {
+        background: linear-gradient(135deg, rgba(12, 10, 31, 0.88), rgba(6, 4, 18, 0.94)) padding-box,
+                    linear-gradient(135deg, rgba(189, 75, 246, 0.35), rgba(0, 240, 255, 0.35)) border-box !important;
+        border: 1.5px solid transparent !important;
+        box-shadow: 0 0 25px rgba(0, 240, 255, 0.08) !important;
+        backdrop-filter: blur(18px) !important;
+        border-radius: 1.5rem !important;
+      }
+
+      /* Resets for headers and sidebars to remain non-rounded layout blocks */
+      header, aside {
+        border-radius: 0px !important;
+      }
+
+      /* Outer frame global layout background */
+      main {
+        background: #02010c !important;
+      }
+
+      /* Sidebar navigation with glassmorphism and beautiful double neon-border styling */
+      aside {
+        background: linear-gradient(180deg, rgba(8, 6, 26, 0.94), rgba(4, 2, 18, 0.98)) padding-box,
+                    linear-gradient(180deg, rgba(189, 75, 246, 0.25), rgba(0, 240, 255, 0.15)) border-box !important;
+        border-right: 2px solid transparent !important;
+        backdrop-filter: blur(24px) !important;
+      }
+
+      /* Cyber inputs - transforming all boring fields into high-contrast glowing neon cyber-inputs */
+      input, select, textarea, [class*="bg-[#0d0c1e]"], [class*="bg-[#0f0e26]"] {
+        background: rgba(8, 6, 26, 0.88) !important;
+        border: 1.5px solid rgba(0, 240, 255, 0.25) !important;
+        color: #ffffff !important;
+        border-radius: 0.75rem !important;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      }
+      input:focus, select:focus, textarea:focus {
+        outline: none !important;
+        border-color: rgba(0, 240, 255, 0.8) !important;
+        box-shadow: 0 0 14px rgba(0, 240, 255, 0.35) !important;
+      }
+      input::placeholder, textarea::placeholder {
+        color: rgba(255, 255, 255, 0.35) !important;
+      }
+
+      /* Re-target any plain white and light gray panels / content cards (Abu Muda & Putih) to match the screenshot's glass folders */
+      .bg-white, 
+      .bg-gray-50, 
+      .bg-gray-100, 
+      .bg-gray-200, 
+      .bg-gray-300, 
+      .bg-slate-50, 
+      .bg-slate-100, 
+      .bg-slate-200, 
+      .bg-neutral-50, 
+      .bg-neutral-100,
+      .bg-gray-100\/80,
+      .bg-gray-50\/85,
+      [class*="bg-gray-100"],
+      [class*="bg-gray-50"] {
+        background: linear-gradient(135deg, rgba(8, 6, 26, 0.85), rgba(4, 2, 18, 0.92)) padding-box,
+                    linear-gradient(135deg, rgba(189, 75, 246, 0.28), rgba(0, 240, 255, 0.28)) border-box !important;
+        border: 1.5px solid transparent !important;
+        box-shadow: 0 0 22px rgba(0, 240, 255, 0.1) !important;
+        backdrop-filter: blur(16px) !important;
+        color: #e2e8f0 !important;
+      }
+
+      /* Override dark/grey texts that are hard to read in a dark cosmic environment */
+      .text-gray-900, 
+      .text-gray-800, 
+      .text-gray-700, 
+      .text-slate-900, 
+      .text-slate-800, 
+      .text-slate-705, 
+      .text-neutral-900, 
+      .text-neutral-800, 
+      .text-black {
+        color: #cbd5e1 !important;
+      }
+      .text-gray-500, .text-gray-400, .text-slate-500, .text-slate-400 {
+        color: #94a3b8 !important;
+      }
+
+      /* High definition conversions for any Amber elements (original alert / setting messages) */
+      .bg-amber-500\/10, [class*="bg-amber-500/10"], .bg-amber-50, .bg-amber-100 {
+        background: rgba(12, 10, 31, 0.95) padding-box,
+                    linear-gradient(135deg, rgba(239, 68, 68, 0.4), rgba(245, 158, 11, 0.4)) border-box !important;
+        border: 1.5px solid transparent !important;
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.15) !important;
+        border-radius: 1.25rem !important;
+      }
+      .text-amber-500, .text-amber-400, .text-amber-300, .text-amber-200 {
+        color: #f59e0b !important;
+        text-shadow: 0 0 6px rgba(245, 158, 11, 0.3) !important;
+      }
+
+      /* emerald/green/teal buttons & select buttons (Ijo -> Screenshotted Active Electric Cyan) */
+      .bg-emerald-500, .bg-emerald-600, .bg-emerald-700, 
+      .bg-green-500, .bg-green-600, .bg-green-700, 
+      .bg-teal-500, .bg-teal-600, .bg-teal-700,
+      [class*="bg-emerald-"], [class*="bg-green-"], [class*="bg-teal-"] {
+        background: linear-gradient(135deg, rgba(0, 240, 255, 0.28) 0%, rgba(59, 130, 246, 0.28) 50%, rgba(189, 75, 246, 0.28) 100%) padding-box,
+                    linear-gradient(135deg, #00d2ff 0%, #3b82f6 50%, #bd4bf6 100%) border-box !important;
+        border: 1.5px solid transparent !important;
+        color: #ffffff !important;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.32) !important;
+        text-shadow: 0 0 4px rgba(0, 240, 255, 0.5) !important;
+      }
+      .bg-emerald-500:hover, .bg-emerald-600:hover, .text-emerald-500:hover, 
+      .bg-green-500:hover, .bg-green-600:hover,
+      .bg-teal-500:hover, .bg-teal-600:hover {
+        background: linear-gradient(135deg, rgba(0, 240, 255, 0.45) 0%, rgba(59, 130, 246, 0.45) 50%, rgba(189, 75, 246, 0.45) 100%) padding-box,
+                    linear-gradient(135deg, #00e5ff 0%, #3b82f6 50%, #d946ef 100%) border-box !important;
+        box-shadow: 0 0 30px rgba(0, 240, 255, 0.5) !important;
+      }
+      .text-emerald-500, .text-emerald-600, .text-green-500, .text-green-600, .text-teal-500, .text-teal-600 {
+        color: #00e5ff !important;
+        text-shadow: 0 0 6px rgba(0, 240, 255, 0.3) !important;
+      }
+
+      /* Purple / Violet selectors (Ungu -> Screenshotted Glowing Cyber Magenta) */
+      .bg-purple-500, .bg-purple-600, .bg-purple-700, 
+      .bg-violet-500, .bg-violet-600, .bg-violet-700, 
+      .bg-indigo-500, .bg-indigo-600, .bg-indigo-700,
+      [class*="bg-purple-"], [class*="bg-violet-"], [class*="bg-indigo-"] {
+        background: linear-gradient(135deg, rgba(189, 75, 246, 0.28) 0%, rgba(59, 130, 246, 0.28) 50%, rgba(0, 240, 255, 0.28) 100%) padding-box,
+                    linear-gradient(135deg, #bd4bf6 0%, #3b82f6 50%, #00d2ff 100%) border-box !important;
+        border: 1.5px solid transparent !important;
+        color: #ffffff !important;
+        box-shadow: 0 0 20px rgba(189, 75, 246, 0.35) !important;
+        text-shadow: 0 0 4px rgba(189, 75, 246, 0.5) !important;
+      }
+      .bg-purple-500:hover, .bg-purple-600:hover, .bg-purple-700:hover,
+      .bg-violet-500:hover, .bg-violet-600:hover, .bg-violet-700:hover,
+      .bg-indigo-600:hover {
+        background: linear-gradient(135deg, rgba(189, 75, 246, 0.45) 0%, rgba(59, 130, 246, 0.45) 50%, rgba(0, 240, 255, 0.45) 100%) padding-box,
+                    linear-gradient(135deg, #d946ef 0%, #3b82f6 50%, #00e5ff 100%) border-box !important;
+        box-shadow: 0 0 30px rgba(189, 75, 246, 0.5) !important;
+      }
+      .text-purple-500, .text-purple-600, .text-violet-500, .text-violet-600, .text-indigo-500, .text-indigo-600 {
+        color: #bd4bf6 !important;
+        text-shadow: 0 0 6px rgba(189, 75, 246, 0.3) !important;
+      }
+
+      /* Primary Active Gradient buttons / Nav tabs matching the gorgeous "New" button */
+      .nav-active, [class*="bg-gradient-to-r from-violet-600 via-[#1e40af] to-[#0891b2]"] {
+        background: linear-gradient(135deg, rgba(189, 75, 246, 0.22) 0%, rgba(59, 130, 246, 0.22) 50%, rgba(0, 240, 255, 0.22) 100%) padding-box,
+                    linear-gradient(135deg, #bd4bf6 0%, #3b82f6 50%, #00d2ff 100%) border-box !important;
+        border: 1.5px solid transparent !important;
+        box-shadow: 0 0 16px rgba(0, 240, 255, 0.3), 0 0 5px rgba(189, 75, 246, 0.15) !important;
+        text-shadow: 0 0 4px rgba(0, 240, 255, 0.5) !important;
+        color: #ffffff !important;
+      }
+
+      /* Cyber-glowing secondary button hover states */
+      [class*="hover:bg-[#121021]/80"]:hover {
+        background: rgba(189, 75, 246, 0.12) !important;
+        border-color: rgba(0, 240, 255, 0.45) !important;
+        color: #00d2ff !important;
+        box-shadow: 0 0 10px rgba(0, 240, 255, 0.1) !important;
+      }
+
+      /* Glow effect animations for the dynamic UI folders */
+      .glow-border-pulse {
+        animation: border-pulse 4s infinite alternate;
+      }
+      @keyframes border-pulse {
+        0% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.08); }
+        100% { box-shadow: 0 0 25px rgba(189, 75, 246, 0.18); }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "openai": "https://esm.sh/openai@4.28.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-[#03020c] text-slate-200 font-sans">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
